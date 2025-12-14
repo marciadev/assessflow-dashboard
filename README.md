@@ -1,73 +1,82 @@
-# React + TypeScript + Vite
+# AssessFlow Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive, mobile-first interface for managing psychological assessments.
+This project simulates a real feature from a clinical software platform, providing clinicians with tools to review, filter, and analyze patient assessments in an accessible and modern dashboard.
 
-Currently, two official plugins are available:
+## Technologies
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-   **Core**: React 19, TypeScript
+-   **Build Tool**: Vite
+-   **Styling**: Tailwind CSS, CSS Variables
+-   **Testing**: Vitest, React Testing Library
+-   **Icons**: Lucide React
 
-## React Compiler
+## Libraries
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+-   **UI Components**: Shadcn UI
+-   **Utilities**: `clsx`, `tailwind-merge`
 
-## Expanding the ESLint configuration
+## Main Functionalities
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+-   **Dashboard Overview**: Key statistics about assessments (Total, Completed, In Progress, Active Patients).
+-   **Responsive Layout**:
+    -   **Desktop**: Detailed table view with sorting and actions.
+    -   **Mobile**: Card-based view optimized for smaller screens.
+-   **Advanced Filtering**:
+    -   Real-time search by patient name or ID.
+    -   Filter by Assessment Status (Completed, In Progress, etc.).
+    -   Filter by Assessment Type (MMPI-2, Beck Depression Inventory, etc.).
+-   **Pagination**: Efficient navigation through large datasets.
+-   **Assessment Details**: Slide-over panel displaying detailed scores, subscales, and clinician notes without leaving the main context.
+-   **Visualizations**: Score visualization with color-coded gauges and progress bars.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Setup Instructions
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+To run this project locally, follow these steps:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/marciadev/assessflow-dashboard.git
+    cd assessflow-dashboard
+    ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2.  **Install dependencies**
+    ```bash
+    npm install
+    ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+3.  **Run the development server**
+    ```bash
+    npm run dev
+    ```
+    Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+4.  **Run Tests**
+    To execute the test suite:
+    ```bash
+    npm test
+    ```
+
+## Approach
+
+The project was built with a **mobile-first** mindset, ensuring that the interface is fully functional and aesthetically pleasing on all device sizes.
+
+-   **Component Architecture**: The application is broken down into small, reusable components (e.g., `AssessmentCard`, `AssessmentTable`, `FilterBar`) to maintain clean and manageable code.
+-   **Separation of Concerns**: Logic for filtering and pagination is separated from the UI components, making the code easier to test and maintain.
+-   **Design System**: A consistent design system was implemented using Tailwind CSS and CSS variables for colors and spacing, ensuring visual consistency across the app.
+-   **Accessibility**: Semantic HTML and ARIA attributes (via Radix UI) were prioritized to ensure the dashboard is accessible.
+
+## Assumptions & Decisions
+
+-   **State Management**: Given the scope, I opted for local React state (`useState`) instead of a global state management library like Redux, as the application state (filters, pagination) is contained within the dashboard view.
+-   **Testing Strategy**: I focused on integration tests for the main user flows (Filtering, Pagination, Viewing Details) to ensure the features work as expected from a user's perspective.
+
+## Time Spent
+
+Approximately 8 hours were spent on this project, covering:
+-   Initial setup and configuration.
+-   Component development and styling.
+-   Responsive design implementation.
+-   Logic implementation (filtering, pagination).
+-   Testing setup and writing test cases.
+-   Refactoring and polish.
