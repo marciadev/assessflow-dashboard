@@ -39,7 +39,7 @@ function Pagination({ currentPage, pageSize, totalItems, onPageChange }: Paginat
               key={num}
               variant={num === currentPage ? "default" : "outline"}
               size="icon"
-              className={`h-9 w-9 ${num === currentPage ? "bg-blue-600 hover:bg-blue-700 text-white" : "border-gray-200 bg-transparent"}`}
+              className={`h-9 w-9 ${num === currentPage ? "bg-blue-600 hover:bg-blue-700 text-white" : "border-gray-200 bg-transparent hover:bg-gray-100 hover:border-gray-300"}`}
               onClick={() => onPageChange(num)}
             >
               {num}

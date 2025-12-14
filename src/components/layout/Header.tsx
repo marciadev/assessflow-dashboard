@@ -6,7 +6,7 @@ function Header() {
     <header className="w-full border-b border-[var(--color-gray-200)] bg-white px-[var(--space-6)] py-[var(--space-4)] sticky top-0 z-[100]">
       <div className="max-w-screen-xl flex items-center justify-between gap-[var(--space-4)] mx-auto">
         <div className="flex items-center gap-[var(--space-2)] no-underline">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[linear-gradient(135deg,var(--color-primary-500),var(--color-primary-700))]">
+          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[linear-gradient(135deg,var(--color-primary-500),var(--color-primary-700))]">
             <FileText className="h-4 w-4 text-white" />
           </div>
           <span
@@ -43,8 +43,8 @@ function Header() {
           </a>
         </nav>
 
-        <Avatar className="h-10 w-10 rounded-full border-2 border-transparent hover:border-[var(--color-primary-100)] hover:shadow-[0_0_0_2px_var(--color-primary-100)] transition-[box-shadow] duration-200 ease-in-out cursor-pointer">
-          <AvatarFallback className="bg-[var(--color-primary-100)] text-[var(--color-primary-600)] text-sm font-medium tracking-tight">
+        <Avatar className="w-9 h-9 rounded-full bg-[var(--color-primary-100)] flex items-center justify-center text-sm cursor-pointer transition-[box-shadow] duration-200 ease-in-out hover:shadow-[0_0_0_2px_var(--color-primary-100)]">
+          <AvatarFallback className="bg-[var(--color-primary-100)] text-[var(--color-primary-700)] text-sm font-medium tracking-tight">
             DR
           </AvatarFallback>
         </Avatar>

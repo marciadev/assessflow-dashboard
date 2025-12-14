@@ -2,12 +2,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { FileText, Eye, Download, MoreVertical } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { formatDate, formatTime, getStatusColors, getScoreColors, getStatusLabel } from "@/utils/utils";
 import type { Assessment } from "@/types/types";
 
@@ -23,24 +17,24 @@ function AssessmentTable({ assessments, onRowClick }: AssessmentTableProps) {
       <CardContent className="p-0">
         <div className="overflow-x-auto border-[solid 2px var(--color-gray-200)] rounded-t-lg border-b-0">
           <table className="w-full">
-            <thead>
-              <tr className="border-b border-gray-200 bg-[color:var(--color-gray-50)]">
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+            <thead className="text-left px-5 py-[14px] text-xs font-bold text-[var(--color-gray-500)] uppercase tracking-wider bg-[var(--color-gray-50)] border-b border-[var(--color-gray-200)]">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-bold uppercase tracking-wider text-[var(--color-gray-500)]">
                   Patient
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                <th className="px-6 py-3 text-left text-xs font-bold uppercase tracking-wider text-[var(--color-gray-500)]">
                   Assessment Type
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                <th className="px-6 py-3 text-left text-xs font-bold uppercase tracking-wider text-[var(--color-gray-500)]">
                   Status
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                <th className="px-6 py-3 text-left text-xs font-bold uppercase tracking-wider text-[var(--color-gray-500)]">
                   Score
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                <th className="px-6 py-3 text-left text-xs font-bold uppercase tracking-wider text-[var(--color-gray-500)]">
                   Date
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                <th className="px-6 py-3 text-left text-xs font-bold uppercase tracking-wider text-[var(--color-gray-500)]">
                   Actions
                 </th>
               </tr>
@@ -80,7 +74,9 @@ function AssessmentTable({ assessments, onRowClick }: AssessmentTableProps) {
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
-                        <FileText className="h-4 w-4 text-gray-400" />
+                        <div className="bg-gray-100 p-2 rounded-md">
+                          <FileText className="h-4 w-4 text-gray-600" />
+                        </div>
                         <span className="text-sm text-gray-900">
                           {assessment.type}
                         </span>
@@ -124,7 +120,7 @@ function AssessmentTable({ assessments, onRowClick }: AssessmentTableProps) {
                         <Button
                           variant="ghost"
                           size="icon"
-                          className="h-8 w-8 text-gray-400 hover:text-gray-600"
+                          className="h-8 w-8 text-gray-400 hover:text-gray-600 hover:bg-gray-100"
                           title="View Details"
                         >
                           <Eye className="h-4 w-4" />
@@ -132,27 +128,20 @@ function AssessmentTable({ assessments, onRowClick }: AssessmentTableProps) {
                         <Button
                           variant="ghost"
                           size="icon"
-                          className="h-8 w-8 text-gray-400 hover:text-gray-600"
+                          className="h-8 w-8 text-gray-400 hover:text-gray-600 hover:bg-gray-100"
                           title="Download Report"
                         >
                           <Download className="h-4 w-4" />
                         </Button>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="h-8 w-8 text-gray-400 hover:text-gray-600"
-                              title="More Options"
-                            >
-                              <MoreVertical className="h-4 w-4" />
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end" className="bg-white">
-                            <DropdownMenuItem className="cursor-pointer hover:bg-gray-100">Edit</DropdownMenuItem>
-                            <DropdownMenuItem className="cursor-pointer hover:bg-gray-100">Delete</DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
+
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 text-gray-400 hover:text-gray-600 hover:bg-gray-100"
+                          title="More Options"
+                        >
+                          <MoreVertical className="h-4 w-4" />
+                        </Button>
                       </div>
                     </td>
                   </tr>

@@ -1,18 +1,15 @@
-import { useState } from "react";
-import type { Assessment, FilterState, AssessmentTypeOption, StatusOption } from "@/types/types";
+import type { Assessment } from "@/types/types";
 import type { AssessmentCardProps } from "@/components/dashboard/AssessmentCard";
-import { paginateItems, filterAssessments, getStatusColors, formatDate, formatTime } from "@/utils/utils";
+import { getStatusColors, formatDate, formatTime } from "@/utils/utils";
 import Layout from "@/components/layout/LayoutWrapper";
 import PageHeader from "@/components/layout/PageHeader";
 import StatsCard from "@/components/dashboard/StatsCard";
 import AssessmentTable from "@/components/dashboard/AssessmentTable";
 import FilterBar from "@/components/dashboard/FilterBar";
 import AssessmentCard from "@/components/dashboard/AssessmentCard";
-import assessmentsData from "@/data/assessments.json";
 import Pagination from "@/components/dashboard/Pagination";
 import AssessmentDetail from "@/components/dashboard/AssessmentDetail";
-
-
+import { useAssessments } from "@/hooks/useAssessments";
 
 function mapAssessmentToCardProps(a: Assessment): AssessmentCardProps {
   const { text: statusColor, bg: statusBg } = getStatusColors(a.status);
@@ -31,31 +28,21 @@ function mapAssessmentToCardProps(a: Assessment): AssessmentCardProps {
 }
 
 function App() {
-  const assessments: Assessment[] = assessmentsData.assessments as Assessment[];
-  const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 5;
-  const [filters, setFilters] = useState<FilterState>({
-    search: "",
-    status: "",
-    type: "",
-  });
-
-  const filteredAssessments = filterAssessments(assessments, filters);
-  const totalItems = filteredAssessments.length;
-  const paginatedAssessments = paginateItems(filteredAssessments, currentPage, pageSize);
-
-  if (currentPage > 1 && paginatedAssessments.length === 0 && totalItems > 0) {
-    setCurrentPage(1);
-  }
-
-  const assessmentTypes: AssessmentTypeOption[] = assessmentsData.assessmentTypes as AssessmentTypeOption[];
-  const statusOptions: StatusOption[] = assessmentsData.statusOptions as StatusOption[];
-
-  const [selectedAssessment, setSelectedAssessment] = useState<Assessment | null>(null);
-
-  const handleAssessmentClick = (assessment: Assessment) => {
-    setSelectedAssessment(assessment);
-  };
+  const {
+    assessments,
+    totalItems,
+    currentPage,
+    pageSize,
+    filters,
+    assessmentTypes,
+    statusOptions,
+    selectedAssessment,
+    setCurrentPage,
+    handleFilterChange,
+    clearFilters,
+    handleAssessmentClick,
+    closeAssessmentDetail,
+  } = useAssessments();
 
   return (
     <Layout>
@@ -63,19 +50,16 @@ function App() {
       <StatsCard />
       <FilterBar
         filters={filters}
-        onFilterChange={(newFilters) => {
-          setFilters(newFilters);
-          setCurrentPage(1);
-        }}
+        onFilterChange={handleFilterChange}
         assessmentTypes={assessmentTypes}
         statusOptions={statusOptions}
       />
-      {paginatedAssessments.length === 0 ? (
+      {assessments.length === 0 ? (
         <div className="text-center py-12 bg-white rounded-lg border border-gray-200">
           <p className="text-gray-500">No assessments found matching your filters.</p>
           <button
             className="mt-2 text-blue-600 hover:underline text-sm font-medium"
-            onClick={() => setFilters({ search: "", status: "", type: "" })}
+            onClick={clearFilters}
           >
             Clear all filters
           </button>
@@ -83,7 +67,7 @@ function App() {
       ) : (
         <>
           <div className="block md:hidden space-y-4">
-            {paginatedAssessments.map((assessment) => (
+            {assessments.map((assessment) => (
               <AssessmentCard
                 key={assessment.id}
                 {...mapAssessmentToCardProps(assessment)}
@@ -93,7 +77,7 @@ function App() {
           </div>
           <div className="hidden md:block">
             <AssessmentTable
-              assessments={paginatedAssessments}
+              assessments={assessments}
               onRowClick={handleAssessmentClick}
             />
           </div>
@@ -107,7 +91,7 @@ function App() {
       )}
       <AssessmentDetail
         assessment={selectedAssessment}
-        onClose={() => setSelectedAssessment(null)}
+        onClose={closeAssessmentDetail}
         isOpen={!!selectedAssessment}
       />
     </Layout>
