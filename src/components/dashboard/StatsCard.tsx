@@ -9,28 +9,49 @@ function StatsCard() {
       icon: FileText,
       value: statsJson.totalAssessments,
       label: "Total Assessments",
-      trend: statsJson.totalAssessmentsTrend !== undefined ? `${statsJson.totalAssessmentsTrend > 0 ? "+" : ""}${statsJson.totalAssessmentsTrend}%` : null,
-      trendUp: statsJson.totalAssessmentsTrend !== undefined ? statsJson.totalAssessmentsTrend >= 0 : null,
-      iconBg: "bg-blue-50",
-      iconColor: "text-blue-600",
+      trend:
+        statsJson.totalAssessmentsTrend !== undefined
+          ? `${statsJson.totalAssessmentsTrend > 0 ? "+" : ""}${statsJson.totalAssessmentsTrend
+          }%`
+          : null,
+      trendUp:
+        statsJson.totalAssessmentsTrend !== undefined
+          ? statsJson.totalAssessmentsTrend >= 0
+          : null,
+      iconBg: "bg-[var(--color-primary-50)]",
+      iconColor: "text-[var(--color-primary-600)]",
     },
     {
       icon: CheckCircle,
       value: statsJson.completed,
       label: "Completed",
-      trend: statsJson.completedTrend !== undefined ? `${statsJson.completedTrend > 0 ? "+" : ""}${statsJson.completedTrend}%` : null,
-      trendUp: statsJson.completedTrend !== undefined ? statsJson.completedTrend >= 0 : null,
+      trend:
+        statsJson.completedTrend !== undefined
+          ? `${statsJson.completedTrend > 0 ? "+" : ""}${statsJson.completedTrend
+          }%`
+          : null,
+      trendUp:
+        statsJson.completedTrend !== undefined
+          ? statsJson.completedTrend >= 0
+          : null,
       iconBg: "bg-green-50",
-      iconColor: "text-green-600",
+      iconColor: "text-[var(--color-success-500)]",
     },
     {
       icon: Clock,
       value: statsJson.inProgress,
       label: "In Progress",
-      trend: statsJson.inProgressTrend !== undefined ? `${statsJson.inProgressTrend > 0 ? "+" : ""}${statsJson.inProgressTrend}%` : null,
-      trendUp: statsJson.inProgressTrend !== undefined ? statsJson.inProgressTrend >= 0 : null,
+      trend:
+        statsJson.inProgressTrend !== undefined
+          ? `${statsJson.inProgressTrend > 0 ? "+" : ""}${statsJson.inProgressTrend
+          }%`
+          : null,
+      trendUp:
+        statsJson.inProgressTrend !== undefined
+          ? statsJson.inProgressTrend >= 0
+          : null,
       iconBg: "bg-yellow-50",
-      iconColor: "text-yellow-600",
+      iconColor: "text-[var(--color-warning-500)]",
     },
     {
       icon: Users,
@@ -43,10 +64,13 @@ function StatsCard() {
     },
   ];
   return (
-    <div className="mb-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="mb-[var(--space-8)] grid gap-[var(--space-6)] sm:grid-cols-2 lg:grid-cols-4">
       {stats.map((stat, index) => (
-        <Card key={index} className="border-gray-200 bg-white">
-          <CardContent className="p-6">
+        <Card
+          key={index}
+          className="bg-white border border-[var(--color-gray-200)] rounded-lg shadow-sm transition-shadow"
+        >
+          <CardContent className="p-4">
             <div className="mb-4 flex items-center justify-between">
               <div
                 className={`flex h-10 w-10 items-center justify-center rounded-lg ${stat.iconBg}`}
@@ -55,16 +79,19 @@ function StatsCard() {
               </div>
               {stat.trend && (
                 <span
-                  className={`text-sm font-medium ${
-                    stat.trendUp ? "text-green-600" : "text-red-600"
-                  }`}
+                  className={`text-sm font-medium ${stat.trendUp ? "text-success-500" : "text-error-500"
+                    }`}
                 >
                   {stat.trendUp ? "↑" : "↓"} {stat.trend}
                 </span>
               )}
             </div>
-            <div className="text-3xl font-bold text-gray-900">{stat.value}</div>
-            <div className="mt-1 text-sm text-gray-600">{stat.label}</div>
+            <div className="text-[28px] font-bold text-gray-900 tracking-tight">
+              {stat.value}
+            </div>
+            <div className="mt-1 text-sm text-gray-600 tracking-[0.01em]">
+              {stat.label}
+            </div>
           </CardContent>
         </Card>
       ))}

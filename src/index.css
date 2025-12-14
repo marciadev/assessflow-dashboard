@@ -5,28 +5,40 @@
 @layer base {
   :root {
     /* Primary Colors */
-    --color-primary-50: #EEF4FF;
-    --color-primary-100: #DCE8FF;
-    --color-primary-500: #4A7DFF;
-    --color-primary-600: #3366FF;
-    --color-primary-700: #2952CC;
+    --color-primary-50: #eef4ff;
+    --color-primary-100: #dce8ff;
+    --color-primary-500: #4a7dff;
+    --color-primary-600: #3366ff;
+    --color-primary-700: #2952cc;
 
     /* Status Colors */
-    --color-success-500: #10B981;
-    --color-warning-500: #F59E0B;
-    --color-error-500: #EF4444;
+    --color-success-500: #10b981;
+    --color-warning-500: #f59e0b;
+    --color-error-500: #ef4444;
 
     /* Neutrals */
-    --color-gray-50: #F9FAFB;
-    --color-gray-100: #F3F4F6;
-    --color-gray-200: #E5E7EB;
-    --color-gray-300: #D1D5DB;
-    --color-gray-400: #9CA3AF;
-    --color-gray-500: #6B7280;
-    --color-gray-600: #4B5563;
+    --color-gray-50: #f9fafb;
+    --color-gray-100: #f3f4f6;
+    --color-gray-200: #e5e7eb;
+    --color-gray-300: #d1d5db;
+    --color-gray-400: #9ca3af;
+    --color-gray-500: #6b7280;
+    --color-gray-600: #4b5563;
     --color-gray-700: #374151;
-    --color-gray-800: #1F2937;
+    --color-gray-800: #1f2937;
     --color-gray-900: #111827;
+
+    /* Spacing Scale */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
 
     /* Border Radius */
     --radius-sm: 4px;
@@ -34,6 +46,9 @@
     --radius-lg: 8px;
     --radius-xl: 12px;
     --radius-full: 9999px;
+    
+    /* Typography */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   .dark {
@@ -61,6 +76,7 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    --chart-6: 0 0% 100%;
   }
 
   * {
@@ -69,5 +85,6 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-family);
   }
 }
