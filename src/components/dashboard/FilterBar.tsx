@@ -37,18 +37,19 @@ function FilterBar({ filters, onFilterChange, assessmentTypes, statusOptions }: 
           onChange={handleSearchChange}
         />
       </div>
-      <div className="flex w-full md:basis-[63.4%] md:max-w-[63.4%] gap-4">
+      <div className="flex flex-col md:flex-row w-full md:basis-[63.4%] md:max-w-[63.4%] gap-4">
         <Select
           value={filters.status || "all-status"}
           onValueChange={handleStatusChange}
         >
-          <SelectTrigger className="w-full md:w-[140px] bg-white border border-gray-200 text-sm text-gray-900 rounded-md h-10">
+          <SelectTrigger className="w-full md:w-[140px] bg-white border border-gray-200 text-sm text-gray-900 rounded-md h-10 focus-visible:ring-2 focus-visible:ring-[var(--color-primary-100)] focus-visible:ring-offset-0 focus-visible:border-[var(--color-primary-500)]">
             <SelectValue placeholder="All Status" />
           </SelectTrigger>
           <SelectContent className="bg-white animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2">
             <SelectItem value="all-status" className="hover:bg-primary-500 hover:text-white focus:bg-primary-500 focus:text-white cursor-pointer pl-2">All Status</SelectItem>
             {statusOptions.map((option) => (
-              <SelectItem key={option.value} value={option.value} className="hover:bg-primary-500 hover:text-white focus:bg-primary-500 focus:text-white cursor-pointer pl-2">
+              <SelectItem key={option.value} value={option.value} tabIndex={0}
+                className="hover:bg-primary-500 hover:text-white focus:bg-primary-500 focus:text-white cursor-pointer pl-2">
                 {option.label}
               </SelectItem>
             ))}
@@ -64,7 +65,8 @@ function FilterBar({ filters, onFilterChange, assessmentTypes, statusOptions }: 
           <SelectContent className="bg-white animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2">
             <SelectItem value="all-types" className="hover:bg-primary-500 hover:text-white focus:bg-primary-500 focus:text-white cursor-pointer pl-2">All Types</SelectItem>
             {assessmentTypes.map((type) => (
-              <SelectItem key={type.code} value={type.code} className="hover:bg-primary-500 hover:text-white focus:bg-primary-500 focus:text-white cursor-pointer pl-2">
+              <SelectItem key={type.code} value={type.code} tabIndex={0}
+                className="hover:bg-primary-500 hover:text-white focus:bg-primary-500 focus:text-white cursor-pointer pl-2">
                 {type.name}
               </SelectItem>
             ))}

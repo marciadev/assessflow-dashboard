@@ -64,7 +64,7 @@ function StatsCard() {
     },
   ];
   return (
-    <div className="mb-[var(--space-8)] grid gap-[var(--space-6)] sm:grid-cols-2 lg:grid-cols-4">
+    <div className="mb-[var(--space-8)] grid gap-[var(--space-6)] grid-cols-2 md:grid-cols-4">
       {stats.map((stat, index) => (
         <Card
           key={index}
@@ -86,7 +86,7 @@ function StatsCard() {
                 </span>
               )}
             </div>
-            <div className="text-[28px] font-bold text-gray-900 tracking-tight">
+            <div className="text-[30px] font-bold text-gray-900 tracking-tight">
               {stat.value}
             </div>
             <div className="mt-1 text-sm text-gray-600 tracking-[0.01em]">

@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { X, Edit3, FileText, Calendar, Download } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import type { Assessment } from "@/types/types";
 import { getStatusColors, getScoreColors, formatDate, getStatusLabel } from "@/utils/utils";
+import { useAssessmentDetail } from "@/hooks/useAssessmentDetail";
 
 interface AssessmentDetailProps {
   assessment: Assessment | null;
@@ -12,29 +12,7 @@ interface AssessmentDetailProps {
 }
 
 function AssessmentDetail({ assessment, onClose, isOpen }: AssessmentDetailProps) {
-  const [activeAssessment, setActiveAssessment] = useState<Assessment | null>(assessment);
-  const [shouldRender, setShouldRender] = useState(isOpen);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    if (assessment) {
-      setActiveAssessment(assessment);
-    }
-  }, [assessment]);
-
-  useEffect(() => {
-    if (isOpen) {
-      setShouldRender(true);
-      const timer = setTimeout(() => setIsVisible(true), 10);
-      return () => clearTimeout(timer);
-    } else {
-      setIsVisible(false);
-      const timer = setTimeout(() => {
-        setShouldRender(false);
-      }, 300);
-      return () => clearTimeout(timer);
-    }
-  }, [isOpen]);
+  const { activeAssessment, shouldRender, isVisible } = useAssessmentDetail({ assessment, isOpen });
 
   if (!shouldRender && !isOpen) return null;
   if (!activeAssessment) return null;
@@ -45,9 +23,8 @@ function AssessmentDetail({ assessment, onClose, isOpen }: AssessmentDetailProps
   return (
     <>
       <div
-        className={`fixed inset-0 bg-black/20 z-[140] transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"
+        className={`fixed inset-0 bg-black/30 z-[140] transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"
           }`}
-        onClick={onClose}
       />
       <div
         className={`fixed right-0 top-0 h-full w-full md:w-[480px] bg-white shadow-2xl z-[150] overflow-y-auto transform transition-transform duration-300 ease-in-out ${isVisible ? "translate-x-0" : "translate-x-full"
@@ -135,21 +112,21 @@ function AssessmentDetail({ assessment, onClose, isOpen }: AssessmentDetailProps
               <h4 className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-4">
                 Overall Score
               </h4>
-              <div className="flex flex-col items-center py-8 bg-[var(--color-gray-50)] rounded-lg">
-                <div className="relative w-64 h-32 mb-4 z-0">
-                  <svg viewBox="0 0 200 100" className="w-full h-full">
+              <div className="flex flex-col items-center py-6 bg-[var(--color-gray-50)] rounded-lg">
+                <div className="relative h-20 mb-4 z-0">
+                  <svg viewBox="0 -5 200 110" className="w-full h-full">
                     <path
                       d="M 180 90 A 80 80 0 0 0 20 90"
                       fill="none"
                       stroke="#e5e7eb"
-                      strokeWidth="16"
+                      strokeWidth="24"
                       strokeLinecap="butt"
                     />
                     <path
                       d="M 180 90 A 80 80 0 0 0 20 90"
                       fill="none"
                       stroke="url(#scoreGradient)"
-                      strokeWidth="16"
+                      strokeWidth="24"
                       strokeLinecap="butt"
                       strokeDasharray={`${(activeAssessment.score / 100) * 251.2} 251.2`}
                     />
@@ -168,8 +145,8 @@ function AssessmentDetail({ assessment, onClose, isOpen }: AssessmentDetailProps
                     </defs>
                   </svg>
 
-                  <div className="absolute inset-0 flex items-center justify-center pt-8">
-                    <span className="text-5xl font-bold text-gray-900">
+                  <div className="absolute inset-0 flex items-center justify-center pt-6">
+                    <span className="text-4xl font-bold text-gray-900">
                       {activeAssessment.score}
                     </span>
                   </div>
@@ -227,7 +204,7 @@ function AssessmentDetail({ assessment, onClose, isOpen }: AssessmentDetailProps
               </div>
             )
           }
-        </div >
+        </div>
 
         <div className="sticky bottom-0 bg-[var(--color-gray-50)] border-t border-[var(--color-gray-200)] px-[var(--space-6)] py-[var(--space-4)] flex flex-col gap-[var(--space-6)] sm:flex-row sm:items-center justify-between">
           <Button variant="outline" className="flex-1 sm:flex-none gap-2 bg-white border border-[var(--color-gray-200)] text-[var(--color-gray-700)] hover:bg-[var(--color-gray-100)] text-sm font-medium rounded-md h-10">
@@ -239,7 +216,7 @@ function AssessmentDetail({ assessment, onClose, isOpen }: AssessmentDetailProps
             Edit Assessment
           </Button>
         </div>
-      </div >
+      </div>
     </>
   );
 }

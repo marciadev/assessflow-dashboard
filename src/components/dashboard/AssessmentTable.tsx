@@ -125,6 +125,7 @@ function AssessmentTable({ assessments, onRowClick }: AssessmentTableProps) {
                           variant="ghost"
                           size="icon"
                           className="h-8 w-8 text-gray-400 hover:text-gray-600"
+                          title="View Details"
                         >
                           <Eye className="h-4 w-4" />
                         </Button>
@@ -132,6 +133,7 @@ function AssessmentTable({ assessments, onRowClick }: AssessmentTableProps) {
                           variant="ghost"
                           size="icon"
                           className="h-8 w-8 text-gray-400 hover:text-gray-600"
+                          title="Download Report"
                         >
                           <Download className="h-4 w-4" />
                         </Button>
@@ -141,13 +143,14 @@ function AssessmentTable({ assessments, onRowClick }: AssessmentTableProps) {
                               variant="ghost"
                               size="icon"
                               className="h-8 w-8 text-gray-400 hover:text-gray-600"
+                              title="More Options"
                             >
                               <MoreVertical className="h-4 w-4" />
                             </Button>
                           </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuItem>Edit</DropdownMenuItem>
-                            <DropdownMenuItem>Delete</DropdownMenuItem>
+                          <DropdownMenuContent align="end" className="bg-white">
+                            <DropdownMenuItem className="cursor-pointer hover:bg-gray-100">Edit</DropdownMenuItem>
+                            <DropdownMenuItem className="cursor-pointer hover:bg-gray-100">Delete</DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </div>

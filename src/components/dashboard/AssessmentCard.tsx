@@ -32,11 +32,9 @@ export function AssessmentCard({
 }: AssessmentCardProps) {
   return (
     <Card
-      className={`border-gray-200 bg-white hover:shadow-md transition-shadow ${onClick ? 'cursor-pointer' : ''}`}
-      onClick={onClick}
+      className="border-gray-200 bg-white hover:shadow-md transition-shadow"
     >
       <CardContent className="p-4">
-
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-3">
             <Avatar className="h-10 w-10 bg-gray-100">
@@ -91,6 +89,7 @@ export function AssessmentCard({
               variant="ghost"
               size="icon"
               className="h-8 w-8 text-gray-400 hover:text-gray-600"
+              title="Download Report"
             >
               <Download className="h-4 w-4" />
             </Button>
@@ -98,6 +97,7 @@ export function AssessmentCard({
               variant="ghost"
               size="icon"
               className="h-8 w-8 text-gray-400 hover:text-gray-600"
+              title="More Actions"
             >
               <MoreVertical className="h-4 w-4" />
             </Button>
