@@ -1,11 +1,17 @@
-import { Button } from "@/components/ui/button";
+import Layout from "@/components/layout/LayoutWrapper";
+import PageHeader from "./components/layout/PageHeader";
+import StatsCard from "./components/dashboard/StatsCard";
+import AssessmentTable from "./components/dashboard/AssessmentTable";
+import FilterBar from "./components/dashboard/FilterBar";
 
 function App() {
   return (
-    <>
-      <Button className="error">Click Me!</Button>
-      <h1 className="text-red-500 p-4">Vite + React</h1>
-    </>
+    <Layout>
+      <PageHeader />
+      <StatsCard />
+      <FilterBar />
+      <AssessmentTable />
+    </Layout>
   );
 }
 

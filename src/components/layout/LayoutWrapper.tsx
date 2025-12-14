@@ -1,7 +1,17 @@
-function LayoutWrapper() {
+import Header from "./Header"
+import type { ReactNode } from "react"
+
+interface LayoutProps {
+  children: ReactNode
+}
+
+export function Layout({ children }: LayoutProps) {
   return (
-    <div>LayoutWrapper</div>
+    <div className="min-h-screen bg-background text-foreground">
+      <Header />
+      <main className="p-6">{children}</main>
+    </div>
   )
 }
 
-export default LayoutWrapper
+export default Layout
